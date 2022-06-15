@@ -17,5 +17,16 @@ router.route('/:id')
       res.json({ error });
     }
   })
+.get(async (req, res) => {
+	const findAlbum = await Albums.findOne({ where: { id: req.params.id } });
+		res.json(findAlbum);
+	})
+	
+	.post(async (req, res) => {
+		const findAlbum = await Albums.findOne({ where: { id: req.params.id } });
+	findAlbum.title = req.body.title;
+		await findAlbum.save();
+		res.json(findAlbum);
+	})
 
 module.exports = router;

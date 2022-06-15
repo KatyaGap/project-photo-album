@@ -7,7 +7,6 @@ const router = express.Router();
 router.post('/', async (req, res) => {
     try {
       const newAlbum = await Albums.create({ title: req.body.title, user_id: res.locals.userId });
-      console.log(newAlbum)
       res.json(newAlbum);
    } catch (error) {
       console.log(error);
@@ -15,4 +14,5 @@ router.post('/', async (req, res) => {
     }
   })
 
-module.exports = router
+
+module.exports = router;
