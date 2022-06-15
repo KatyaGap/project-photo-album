@@ -7,8 +7,12 @@ const router = express.Router();
 router.route('/:id')
 .get(async (req, res) => {
 	const { id } = req.params;
-	const albums = await Albums.findAll({ where: { user_id: id } });
+	console.log('===id===', id);
+
+	const albums = await Albums.findAll({ where: { user_id: id }, raw: true });
 	// res.locals.userName = 
+	console.log('===albums===', albums);
+	
 	res.render('user', { albums });
 });
 
