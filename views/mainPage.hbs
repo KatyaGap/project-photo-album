@@ -1,0 +1,9 @@
+<div class="row mt-5">
+  <div class="col">
+    <ul id="ul" class="list-group">
+      {{#each users}}
+        <li id="li-{{id}}" class="list-group-item"><a href="/user:id">{{this.login}}</a></li>
+      {{/each}}
+    </ul>
+  </div>
+</div>
