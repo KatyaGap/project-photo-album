@@ -3,7 +3,7 @@ const formFoto = document.querySelector('#formFoto')
 const deleteFotoButton = document.querySelector('#deleteFotoButton')
 
 
-formFoto.addEventListener('submit', async (e) => {
+formFoto?.addEventListener('submit', async (e) => {
   e.preventDefault();
   const response = await fetch('/card', {
     method: 'post',
@@ -59,7 +59,7 @@ userForm?.addEventListener('submit', async (e) => {
 	});
 
 	// удаление альбома
-container.addEventListener('click', async (e) => {
+container?.addEventListener('click', async (e) => {
   e.preventDefault();
   if (e.target.dataset.delete) {
     const id = e.target.dataset.delete;
@@ -76,7 +76,7 @@ container.addEventListener('click', async (e) => {
 
 	// редактирование названия альбома
 	// отлавливаем нажатие на кнопку редактирования
-	container.addEventListener('click', async (e) => {
+	container?.addEventListener('click', async (e) => {
 		e.preventDefault();
 		if (e.target.dataset.edit) {
 				const id = e.target.dataset.edit;
@@ -96,7 +96,7 @@ container.addEventListener('click', async (e) => {
 		}})
 
 // добавляем новый текст дела
-			container.addEventListener('click', async (e) => {
+			container?.addEventListener('click', async (e) => {
 				e.preventDefault();
 				if (e.target.dataset.update){
 				const id = e.target.dataset.update;

@@ -1,6 +1,6 @@
 const {editForm} = document.forms
 
-editForm.addEventListener('submit', async (event) => {
+editForm?.addEventListener('submit', async (event) => {
   event.preventDefault();
   console.log('15151515')
   const fotoId = event.target.id;
