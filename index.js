@@ -9,12 +9,14 @@ const cors = require('cors');
 const {checkSession} = require('./middlewares/checkAuth')
 
 
+
 const indexRouter = require('./routes/index.router');
 const cardRouter = require('./routes/card.router')
 const registerRouter = require('./routes/register.router')
 const loginRouter = require('./routes/login.router')
 const logoutRouter = require('./routes/logout.router')
 const userRouter = require('./routes/user.router')
+const formRouter = require('./routes/form.router')
 // const { locals } = require('./middlewares/locals');
 
 const app = express();
@@ -49,11 +51,11 @@ app.use(checkSession);
 
 // app.use(locals);
 
-app.use(checkSession);
 app.use('/', indexRouter);
 app.use('/register', registerRouter);
 app.use('/login', loginRouter);
 app.use('/logout', logoutRouter);
 app.use('/card', cardRouter);
 app.use('/user', userRouter);
+app.use('/userForm', formRouter);
 app.listen(3000, () => { console.log('Hello express'); });
