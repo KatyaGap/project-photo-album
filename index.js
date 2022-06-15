@@ -17,6 +17,7 @@ const loginRouter = require('./routes/login.router')
 const logoutRouter = require('./routes/logout.router')
 const userRouter = require('./routes/user.router')
 const formRouter = require('./routes/form.router')
+const albumRouter = require('./routes/album.router');
 // const { locals } = require('./middlewares/locals');
 
 const app = express();
@@ -58,4 +59,5 @@ app.use('/logout', logoutRouter);
 app.use('/card', cardRouter);
 app.use('/user', userRouter);
 app.use('/userForm', formRouter);
+app.use('/album', albumRouter);
 app.listen(3000, () => { console.log('Hello express'); });

@@ -1,11 +1,15 @@
 <div class="row mt-5">
   <div class="col">	
 		<h1>Photoalbums of {{login}}</h1>
-
-    <ul id="ul" class="list-group">	
 			{{#if albums}}
+    <ul id="ul" class="list-group">	
+
       {{#each albums}}
-        <li id="li-{{id}}" class="list-group-item"><a href="/user:id/album:id">{{this.title}}</a></li>
+        <li id="li-{{id}}" class="list-group-item">
+          <a href="/user:id/album:id">{{this.title}}</a>
+          <button data-change={{id}} class="change-button" type="click">change</button>
+          <button data-delete={{id}} class="delete-button" type="click">delete</button>
+        </li>
       {{/each}}
 			</ul>
 			{{else}}
