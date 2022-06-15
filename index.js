@@ -14,6 +14,7 @@ const cardRouter = require('./routes/card.router')
 const registerRouter = require('./routes/register.router')
 const loginRouter = require('./routes/login.router')
 const logoutRouter = require('./routes/logout.router')
+const userRouter = require('./routes/user.router')
 // const { locals } = require('./middlewares/locals');
 
 const app = express();
@@ -54,4 +55,5 @@ app.use('/register', registerRouter);
 app.use('/login', loginRouter);
 app.use('/logout', logoutRouter);
 app.use('/card', cardRouter);
+app.use('/user', userRouter);
 app.listen(3000, () => { console.log('Hello express'); });
