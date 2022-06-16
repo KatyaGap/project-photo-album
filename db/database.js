@@ -2,7 +2,7 @@ module.exports =
 {
   "development": {
     "username": "admin",
-    "password": "51035",
+    "password": "123",
     "database": "photo",
     "host": "localhost",
     "dialect": "postgres"
