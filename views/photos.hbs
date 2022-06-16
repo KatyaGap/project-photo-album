@@ -1,5 +1,6 @@
 
-<h1>Dogs</h1>
+<h1>PhotoCards</h1>
+{{#if check2}}
 <form form data-id={{albId}} id="form" name="busForm">
   <div class="mb-3">
     <input type="text" class="form-control" name="photo_title" placeholder="photo_title">
@@ -8,8 +9,6 @@
   </div>
   <button type="submit" class="btn btn-primary">Add</button>
 </form>
-
-
 <div class="container">
 <div id="dogList">
 	{{#each photos}}
@@ -23,6 +22,21 @@
 		<button data-delete={{id}} class="btn btn-primary" type="click">delete</button>
   </div>
 </div>
+
 {{/each}}
 </div>
 </div>
+{{else}}
+<div class="container">
+<div id="dogList">
+	{{#each photos}}
+	<div id='div-{{id}}' class="card" style="width: 18rem;" >
+  <img src="{{this.image}}" class="card-img-top" alt={{this.title}}>
+  <div class="card-body">
+    <h5 class="card-title">{{this.photo_title}}</h5>
+    <p class="card-text">{{this.description}}</p>
+    <button data-more={{id}} class="btn btn-primary">view more</button>
+  </div>
+</div>
+{{/each}}
+{{/if}}
