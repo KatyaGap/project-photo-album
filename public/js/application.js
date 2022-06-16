@@ -27,7 +27,7 @@ userForm?.addEventListener('submit', async (e) => {
 			ul.insertAdjacentHTML('beforeend', 
       `<li id="li-${result.id}" class="list-group-item">
       <a href="/user:id/album:id">${result.title}</a>
-      <button data-change=${result.id} class="btn btn-primary" type="click">edit title</button>
+      <button data-edit=${result.id} class="btn btn-primary" type="click">edit title</button>
       <button data-delete=${result.id} class="btn btn-primary" type="click">delete</button>
     </li>`)
 		}
