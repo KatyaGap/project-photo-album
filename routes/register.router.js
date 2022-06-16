@@ -12,7 +12,7 @@ router.route('/')
     try {
       const { email, name, password } = req.body;
       if (email && name && password) {
-        const hashPass = await bcrypt.hash(password, 10);
+        const hashPass = await bcrypt.hash(password, Number(process.env.SALTROUNDS));
         const user = await Users.create({ email: email, login: name, password: hashPass });
 				console.log(user)
 				req.session.userId = user.id;

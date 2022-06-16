@@ -22,6 +22,7 @@ const albumRouter = require('./routes/album.router');
 // const { locals } = require('./middlewares/locals');
 
 const app = express();
+const PORT = process.env.PORT ?? 3000;
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
@@ -63,4 +64,4 @@ app.use('/card', cardRouter);
 
 app.use('/userForm', formRouter);
 app.use('/album', albumRouter);
-app.listen(3000, () => { console.log('Hello express'); });
+app.listen(PORT, () => { console.log('Hello express'); });

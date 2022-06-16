@@ -42,24 +42,6 @@ formFoto?.addEventListener("submit", async (e) => {
   }
 });
 
-photoBut?.addEventListener("submit", async (event) => {
-  event.preventDefault();
-  console.log(event.target.id);
-  if (event.target.dataset.delete) {
-    const id = e.target.dataset.delete;
-    console.log(id);
-    const div = document.getElementById(`div-${id}`);
-    console.log(div);
-    const response = await fetch(`/${id}`, {
-      method: "delete",
-    });
-    if (response.ok) {
-      console.log(response);
-      div.remove();
-    }
-  }
-});
-
 ul?.addEventListener("click", async (e) => {
   e.preventDefault();
   if (e.target.dataset.delete) {
