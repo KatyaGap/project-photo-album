@@ -8,9 +8,6 @@ router.route('/:id')
 .get(async (req, res) => {
 	const { id } = req.params;
 	const albums = await Albums.findAll({ where: { user_id: id }, raw: true });
-	// const album = await Albums.findOne({ where: { user_id: id }, raw: true });
-	// console.log('album', album);
-	// res.locals.foreignUser = album.user_id;
 	const notAdmin = await Users.findOne({ where: { id }, raw: true });
 	res.locals.notAdminName = notAdmin.login;
 	res.locals.notAdminId = notAdmin.id;
