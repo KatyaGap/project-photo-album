@@ -7,13 +7,25 @@ const router = express.Router();
 router.route('/:id')
 .get(async (req, res) => {
 	const { id } = req.params;
-	console.log('===id===', id);
-
 	const albums = await Albums.findAll({ where: { user_id: id }, raw: true });
-	// res.locals.userName = 
-	console.log('===albums===', albums);
-	
-	res.render('user', { albums });
-});
+	// const album = await Albums.findOne({ where: { user_id: id }, raw: true });
+	// console.log('album', album);
+	// res.locals.foreignUser = album.user_id;
+	const notAdmin = await Users.findOne({ where: { id }, raw: true });
+	res.locals.notAdminName = notAdmin.login;
+	res.locals.notAdminId = notAdmin.id;
+	console.log('notAdmin', notAdmin)
+	console.log(res.locals.notAdminName);
+	console.log(res.locals.notAdminId);
+	function checkAdmin () {
+		if (res.locals.notAdminId === res.locals.userId) {
+			return true;
+	};
+}
+	const check = checkAdmin()
+	console.log(check)
+	res.render('user', { albums, check});
+})
+
 
 module.exports = router;
