@@ -11,9 +11,6 @@ router.route('/:id')
 	const notAdmin = await Users.findOne({ where: { id }, raw: true });
 	res.locals.notAdminName = notAdmin.login;
 	res.locals.notAdminId = notAdmin.id;
-	console.log('notAdmin', notAdmin)
-	console.log(res.locals.notAdminName);
-	console.log(res.locals.notAdminId);
 	function checkAdmin () {
 		if (res.locals.notAdminId === res.locals.userId) {
 			return true;

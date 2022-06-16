@@ -16,7 +16,6 @@ router
     try {
       const { id } = req.params;
       const { newTitle, newDescription } = req.body;
-			console.log(req.body)
       await Cards.update(
         {
           photo_title: newTitle,

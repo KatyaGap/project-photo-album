@@ -7,12 +7,19 @@ const upload = require("../middlewares/multer.middleware");
 router.route('/:id')
 .get(async (req, res) => {
 	const photos = await Cards.findAll({ where: { album_id: req.params.id } });
-	console.log('photos', photos);
-	const card = await Cards.findOne({ where: { album_id: req.params.id } });
-	// console.log(card)
-	// res.locals.AlbId = cardAlb.album_id;
-	// console.log(res.locals.AlbId)
-	res.render("photos", { photos, albId: req.params.id });
+	// console.log('photos', photos);
+	// const card = await Cards.findOne({ where: { album_id: req.params.id } });
+	const album = await Albums.findOne({ where: { id: req.params.id }});
+	const albumOwn = album.user_id;
+	res.locals.albumOwn = albumOwn;
+	function checkAdmin2() {
+		if (res.locals.albumOwn === res.locals.userId) {
+			return true;
+	}
+	return false;
+}
+	const check2 = checkAdmin2()
+	res.render("photos", { photos, albId: req.params.id, check2 });
 })
 
 // добавление карточки
