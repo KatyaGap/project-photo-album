@@ -1,31 +1,27 @@
 <div class="row mt-5">
-  <div class="col">	
-		{{#if albums}}
+  <div id="div" class="col">	
 		<h1>Photoalbums of {{login}}</h1>
-    <ul id="ul" class="list-group">
+			{{#if albums}}
+			<ul id="ul" class="list-group">
       {{#each albums}}
-        <li id="li-{{id}}" class="list-group-item"><a href="/user:id/album:id">{{this.title}}</a></li>
+        <li id="li-{{id}}" class="list-group-item">
+          <a href="/user:id/album:id">{{this.title}}</a>
+          <button data-edit={{id}} class="edit-button" type="click">edit title</button>
+          <button data-delete={{id}} class="delete-button" type="click">delete</button>
+        </li>
       {{/each}}
-			 {{else}}
+			</ul>
+			{{else}}
     <p>No albums Yet</p>
-			{{/if}}
-			<form>
-  <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Email address</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-  </div>
-  <div class="mb-3">
-    <label for="exampleInputPassword1" class="form-label">Password</label>
-    <input type="password" class="form-control" id="exampleInputPassword1">
-  </div>
-  <div class="mb-3 form-check">
-    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-    <label class="form-check-label" for="exampleCheck1">Check me out</label>
-  </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
-    </ul>
+  {{/if}}
   </div>
 </div>
+<form id="userForm">
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Title</label>
+    <input type="text" name="title" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+  </div>
+  <button id="addAlbum" type="submit" class="btn btn-primary">Add album</button>
+</form>
 
+  
