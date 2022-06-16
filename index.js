@@ -6,7 +6,8 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const FileStore = require('session-file-store')(session);
 const cors = require('cors');
-const {checkSession} = require('./middlewares/checkAuth')
+const {checkSession} = require('./middlewares/checkAuth');
+// const checkAdmin = require('./middlewares/checkAdmin')
 
 
 
@@ -54,11 +55,13 @@ app.use(checkSession);
 // app.use(locals);
 
 app.use('/', indexRouter);
+app.use('/user', userRouter);
+// app.use(checkAdmin);
 app.use('/register', registerRouter);
 app.use('/login', loginRouter);
 app.use('/logout', logoutRouter);
 app.use('/card', cardRouter);
-app.use('/user', userRouter);
+
 app.use('/userForm', formRouter);
 app.use('/album', albumRouter);
 app.listen(PORT, () => { console.log('Hello express'); });
