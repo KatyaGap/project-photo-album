@@ -42,7 +42,7 @@ editForm?.addEventListener('click', async (event) => {
     const response = await fetch(`/card/${fotoId}`, {
       method: 'delete',
     });
-  //  console.log('response', response.ok)
+  //
     if (response.ok) {
       // console.log(response)
       div.remove()
