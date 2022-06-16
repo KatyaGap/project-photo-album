@@ -1,9 +1,9 @@
 module.exports =
 {
   "development": {
-    "username": "admin",
-    "password": "123",
-    "database": "photo",
+    "username": process.env.DB_USER,
+    "password": process.env.DB_PASSWORD,
+    "database": process.env.DB_NAME,
     "host": "localhost",
     "dialect": "postgres"
   },
