@@ -1,7 +1,37 @@
 
 const formFoto = document.querySelector('#formFoto')
 const deleteFotoButton = document.querySelector('#deleteFotoButton')
+const userForm = document.querySelector('#userForm');
+console.log(userForm)
+const ul = document.getElementById('ul');
+const container = document.querySelector('#div');
+const div = document.getElementById('update');
 
+
+// добавление нового альбома
+userForm?.addEventListener('submit', async (e) => {
+  e.preventDefault();
+	console.log('ccliiiiiick')
+		const formData = new FormData(userForm);
+		const data = Object.fromEntries(formData);
+		const response = await fetch('/userForm', {
+			method: 'post',
+			headers: {
+				'Content-type': 'application/json',
+			},
+			body: JSON.stringify(data),
+		});
+		if (response.ok) {
+			const result = await response.json();
+			console.log(result)
+			ul.insertAdjacentHTML('beforeend', 
+      `<li id="li-${result.id}" class="list-group-item">
+      <a href="/user:id/album:id">${result.title}</a>
+      <button data-edit=${result.id} class="btn btn-primary" type="click">edit title</button>
+      <button data-delete=${result.id} class="btn btn-primary" type="click">delete</button>
+    </li>`)
+		}
+	});
 
 formFoto?.addEventListener('submit', async (e) => {
   e.preventDefault();
@@ -29,37 +59,13 @@ formFoto?.addEventListener('submit', async (e) => {
 // 		}
 // 	}})
 
-const userForm = document.querySelector('#userForm');
-const ul = document.getElementById('ul');
-const container = document.querySelector('#div');
+
 // console.log(ul)
 
-// добавление нового альбома
-userForm?.addEventListener('submit', async (e) => {
-  e.preventDefault();
-		const formData = new FormData(userForm);
-		const data = Object.fromEntries(formData);
-		const response = await fetch('/userForm', {
-			method: 'post',
-			headers: {
-				'Content-type': 'application/json',
-			},
-			body: JSON.stringify(data),
-		});
-		if (response.ok) {
-			const result = await response.json();
-			console.log(result)
-			ul.insertAdjacentHTML('beforeend', 
-      `<li id="li-${result.id} class="list-group-item">
-      <a href="/user:id/album:id">${result.title}</a>
-      <button data-change=${result.id} class="change-button" type="click">change</button>
-      <button data-delete=${result.id} class="delete-button" type="click">delete</button>
-    </li>`)
-		}
-	});
+
 
 	// удаление альбома
-container?.addEventListener('click', async (e) => {
+ul?.addEventListener('click', async (e) => {
   e.preventDefault();
   if (e.target.dataset.delete) {
     const id = e.target.dataset.delete;
@@ -76,12 +82,13 @@ container?.addEventListener('click', async (e) => {
 
 	// редактирование названия альбома
 	// отлавливаем нажатие на кнопку редактирования
-	container?.addEventListener('click', async (e) => {
+	ul?.addEventListener('click', async (e) => {
 		e.preventDefault();
 		if (e.target.dataset.edit) {
 				const id = e.target.dataset.edit;
-				console.log('click ed')
+				console.log('click edit')
 				const li = document.getElementById(`li-${id}`);
+				console.log(li)
 				const response = await fetch(`/album/${id}`);
 			if (response.ok) {
 				const result = await response.json();
@@ -96,7 +103,7 @@ container?.addEventListener('click', async (e) => {
 		}})
 
 // добавляем новый текст дела
-			container?.addEventListener('click', async (e) => {
+			div?.addEventListener('click', async (e) => {
 				e.preventDefault();
 				if (e.target.dataset.update){
 				const id = e.target.dataset.update;
@@ -115,8 +122,8 @@ container?.addEventListener('click', async (e) => {
 					const result = await response.json();
 					li.innerHTML = `<li id="li-${id}" class="list-group-item">
           <a href="/user:id/album:id">${result.title}</a>
-          <button data-edit=${id} class="change-button" type="click">Edit title</button>
-          <button data-delete=${id} class="delete-button" type="click">delete</button>
+          <button data-edit=${id} class="btn btn-primary" type="click">Edit title</button>
+          <button data-delete=${id} class="btn btn-primary" type="click">delete</button>
         </li>`;
 				}
 			}
