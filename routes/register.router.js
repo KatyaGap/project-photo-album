@@ -14,11 +14,8 @@ router.route('/')
       if (email && name && password) {
         const hashPass = await bcrypt.hash(password, Number(process.env.SALTROUNDS));
         const user = await Users.create({ email: email, login: name, password: hashPass });
-				console.log(user)
 				req.session.userId = user.id;
-				console.log(req.session.userId)
 				req.session.userLogin = user.login;
-				console.log(req.session.userLogin)
         res.redirect('/');
       }
     } catch (err) {

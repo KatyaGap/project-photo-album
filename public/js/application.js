@@ -3,9 +3,9 @@ const { photoBut } = document.forms;
 const formFoto = document.querySelector("#formFoto");
 const userForm = document.querySelector("#userForm");
 const ul = document.getElementById("ul");
+console.log(ul)
 const div = document.getElementById("update");
 const mainDiv = document.querySelector('.main');
-console.log(mainDiv)
 
 
 // добавление нового альбома
@@ -26,15 +26,16 @@ userForm?.addEventListener("submit", async (e) => {
     ul.insertAdjacentHTML(
       "beforeend",
       `<li id="li-${result.id}" class="list-group-item">
-      <a href="/user/album">${result.title}</a>
+			<a data-href=${result.id} id="a-${result.id}" href="">${result.title}</a>
       <button data-edit=${result.id} class="btn btn-primary" type="click">edit title</button>
       <button data-delete=${result.id} class="btn btn-primary" type="click">delete</button>
+			<button data-private=${result.id} class="btn btn-primary" type="click">private</button>
     </li>`
     );
   }
 });
 
-
+// удаление альбома
 ul?.addEventListener("click", async (e) => {
   e.preventDefault();
   if (e.target.dataset.delete) {
@@ -112,3 +113,51 @@ ul?.addEventListener("click", async (e) => {
     }
   }
 });
+
+// кнопка приватности
+ul?.addEventListener("click", async (e) => {
+  e.preventDefault();
+  if (e.target.dataset.private) {
+    const id = e.target.dataset.private;
+    console.log("click edit");
+    const li = document.getElementById(`li-${id}`);
+    const response = await fetch(`/album/${id}`);
+    if (response.ok) {
+      const result = await response.json();
+      li.innerHTML = `<form id="privateForm">
+				<div class="mb-3">
+					<label for="exampleInputEmail1" class="form-label">Add person's email</label>
+					<input type="text" name="privateEmail" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="email">
+				</div>
+				<button data-email=${id} id="editAlbum" type="submit" class="btn btn-primary">Submit</button>
+			</form>`
+    }
+  }
+});
+
+// добавление емайл в приватный список
+ul?.addEventListener("submit", async (e) => {
+	console.log("click aaaaaa");
+  e.preventDefault();
+  if (e.target.dataset.email) {
+    const id = e.target.dataset.privateEmail;
+    console.log("click priv email");
+    const li = document.getElementById(`li-${id}`);
+		const formPriv = document.querySelector("#privateForm");
+    const formData = new FormData(formPriv);
+		const data = Object.fromEntries(formData);
+		const response = await fetch(`/private/${id}`, {
+      method: "post",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+      const result = await response.json();
+
+      li.innerHTML = `<a data-href={{id}} id="a-{{id}}" href="">{{this.title}}</a>
+			<button data-edit={{id}} class="btn btn-primary" type="click">edit title</button>
+			<button data-delete={{id}} class="btn btn-primary" type="click">delete</button>
+			<button data-private={{id}} class="btn btn-primary" type="click">private</button>`
+    }
+  })

@@ -97,3 +97,16 @@ container?.addEventListener('click', async (e) => {
 				}
 			}
 		})
+
+		// view more
+		container?.addEventListener('click', async (e) => {
+			e.preventDefault();
+			if (e.target.dataset.more) {
+				const id = e.target.dataset.more;
+				const div = document.getElementById(`div-${id}`);
+				const image = div.querySelector('img')
+				const response = await fetch(`/card/${id}`)
+				if (response.ok) {
+					image.classList.toggle('viewMore');
+				}
+			}});
