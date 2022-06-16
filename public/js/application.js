@@ -1,8 +1,8 @@
-const formFoto = document.querySelector('#formFoto')
-const deleteFotoButton = document.querySelector('#deleteFotoButton')
+const formFoto  = document.querySelector('#formFoto')
+const { photoBut } = document.forms
 
-
-formFoto.addEventListener('submit', async (e) => {
+console.log(formFoto)
+formFoto?.addEventListener('submit', async (e) => {
   e.preventDefault();
   const response = await fetch('/card', {
     method: 'post',
@@ -14,18 +14,19 @@ formFoto.addEventListener('submit', async (e) => {
   
 });
 
-// deleteFotoButton.addEventListener('click', async (e) => {
-// 	e.preventDefault();
-// 	if (e.target.dataset.delete) {
-// 		const id = e.target.dataset.delete;
-// 		const div = document.getElementById(`div-${id}`);
-// 		const response = await fetch(`/delete/${id}`, {
-// 			method: 'delete',
-// 		});
-// 		if (response.ok) {
-// 			console.log(response)
-// 			div.remove();
-// 		}
-// 	}})
-
-
+photoBut?.addEventListener('submit', async (event) => {
+	event.preventDefault();
+  console.log(event.target.id)
+	if (event.target.dataset.delete) {
+		const id = e.target.dataset.delete;
+		console.log(id)
+		const div = document.getElementById(`div-${id}`);
+	console.log(div)
+		const response = await fetch(`/${id}`, {
+			method: 'delete',
+		});
+		if (response.ok) {
+			console.log(response)
+			div.remove();
+		}
+	}})

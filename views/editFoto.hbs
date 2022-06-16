@@ -1,18 +1,20 @@
-<div id='div-{{id}}' class="card addButton" style="width: 18rem;">
-    <img src="{{this.image}}" class="card-img-top" alt="photo">
+<div id="div-{{card.id}}" class="card addButton" style="width: 18rem;">
+    <img src="{{card.image}}" class="card-img-top" alt="photo">
     <div class="card-body">
-     <h5 class="card-title">{{this.title}}</h5>
-      <p class="card-text">{{this.description}}</p>
+     <h5 class="card-title">{{card.photo_title}}</h5>
+      <p class="card-text">{{card.description}}</p>
     </div>  
   </div>
-  <form name="editForm" id={{id}}>
+
+  <form  name="editForm" id={{card.id}}>
     <div class="mb-3">
     <label for="exampleInputName1" class="form-label">Title</label>
-    <input type="text" name="title" class="form-control" id="exampleInputName1" placeholder={{this.title}}>
+    <input type="text" name="newTitle" class="form-control" id="exampleInputName1" placeholder={{card.photo_title}}>
     <label for="exampleInputName1" class="form-label">Description</label>
-    <input type="text" name="description" class="form-control" id="exampleInputName1" placeholder={{this.description}}>
+    <input type="text" name="newDescription" class="form-control" id="exampleInputName1" placeholder={{card.description}}>
   </div>
   {{!-- <button type="submit" data-userId={{student.id}} class="btn btn-primary">Edit</button> --}}
-  <button id="editFotoButton" type="submit" class="btn btn-primary">Edit</button>
+  <button data-edit={{card.id}} id="{{card.id}}" type="click" class="btn btn-primary">Edit</button>
+  <button data-delete={{card.id}} id="{{card.id}}" type="click" class="btn btn-primary">Delete</button>
 </form>  </div>
 </div>
