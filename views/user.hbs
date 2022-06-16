@@ -1,6 +1,6 @@
 <div class="row mt-5">
-  <div  class="col">	
-		<h1>Photoalbums of {{notAdminName}}</h1>
+  <div  class="col 5">	
+		<h1>Photoalbums of {{adminName}}</h1>
 	{{#if check}}
 	<div id="update">
 		<ul id="ul" class="list-group">
@@ -10,7 +10,8 @@
           <a data-href={{id}} id="a-{{id}}" href="">{{this.title}}</a>
           <button data-edit={{id}} class="btn btn-primary" type="click">edit title</button>
           <button data-delete={{id}} class="btn btn-primary" type="click">delete</button>
-        </li>	
+					<button data-private={{id}} class="btn btn-primary" type="click">private</button>
+        </li>
 				{{/each}}
 				</ul>	
   </div>

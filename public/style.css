@@ -1,3 +1,6 @@
 .addButton {
 margin: 10px
 }
+.viewMore{
+	transform: scale(3);
+}
