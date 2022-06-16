@@ -19,6 +19,8 @@ router.route('/:id')
   })
 .get(async (req, res) => {
 	const findAlbum = await Albums.findOne({ where: { id: req.params.id } });
+	res.locals.albumId = findAlbum.id;
+	console.log('albumId', res.locals.albumId)
 		res.json(findAlbum);
 	})
 	

@@ -4,6 +4,9 @@ const formFoto = document.querySelector("#formFoto");
 const userForm = document.querySelector("#userForm");
 const ul = document.getElementById("ul");
 const div = document.getElementById("update");
+const mainDiv = document.querySelector('.main');
+console.log(mainDiv)
+
 
 // добавление нового альбома
 userForm?.addEventListener("submit", async (e) => {
@@ -23,7 +26,7 @@ userForm?.addEventListener("submit", async (e) => {
     ul.insertAdjacentHTML(
       "beforeend",
       `<li id="li-${result.id}" class="list-group-item">
-      <a href="/user${res.locals.notAminId}/album{id">${result.title}</a>
+      <a href="/user/album">${result.title}</a>
       <button data-edit=${result.id} class="btn btn-primary" type="click">edit title</button>
       <button data-delete=${result.id} class="btn btn-primary" type="click">delete</button>
     </li>`
@@ -31,14 +34,27 @@ userForm?.addEventListener("submit", async (e) => {
   }
 });
 
+// добавление карточки
 formFoto?.addEventListener("submit", async (e) => {
   e.preventDefault();
-  const response = await fetch("/card", {
+	const { id }= formFoto.dataset;
+  const response = await fetch(`/albumCards/${id}`, {
     method: "post",
     body: new FormData(formFoto),
   });
   if (response.ok) {
-    window.location = "http://localhost:3000/card";
+		const result = await response.json();
+		console.log(result);
+    mainDiv.insertAdjacentHTML('beforeend', `<form id="form-${result.id}" name="photoBut">
+		<div id='div-${result.id}'  class="card addButton" style="width: 18rem;">
+			<img src="${result.image}" class="card-img-top" alt="photo">
+			<div class="card-body">
+			 <h5 class="card-title">${result.photo_title}</h5>
+				<p class="card-text">${result.description}</p>
+				<a href="/card/{{id}}">Edit</a>
+			</div>  
+		</div>
+		</form>`)
   }
 });
 
@@ -104,6 +120,18 @@ div?.addEventListener("click", async (e) => {
           <button data-edit=${id} class="btn btn-primary" type="click">Edit title</button>
           <button data-delete=${id} class="btn btn-primary" type="click">delete</button>
         </li>`;
+    }
+  }
+});
+// клики на ссылки
+ul?.addEventListener("click", async (e) => {
+  if (e.target.dataset.href) {
+    const id = e.target.dataset.href;
+    const a = document.getElementById(`a-${id}`);
+    const response = await fetch(`/album/${id}`)
+    if (response.ok) {
+      console.log(response);
+      window.location.href = `/albumCards/${id}`;
     }
   }
 });

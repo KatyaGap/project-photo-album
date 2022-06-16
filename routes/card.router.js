@@ -6,20 +6,15 @@ const upload = require("../middlewares/multer.middleware");
 const router = express.Router();
 
 router
-  .route("/")
-  .get(async (req, res) => {
-    const photos = await Cards.findAll();
-    console.log(photos);
-    res.render("photos", { photos });
-  })
-
+  .route("/:id")
   .post(upload.single("image"), async (req, res) => {
     try {
+			console.log(req.body)
       const card = await Cards.create({
         ...req.body,
         image: req.file.path.replace("public", ""),
       });
-      res.status(202).json({ card });
+      res.status(202).json(card);
     } catch (error) {
       console.log(error);
       res.json({ error });

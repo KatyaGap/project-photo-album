@@ -7,6 +7,7 @@ const session = require('express-session');
 const FileStore = require('session-file-store')(session);
 const cors = require('cors');
 const {checkSession} = require('./middlewares/checkAuth');
+const albumCardsRouter = require('./routes/albumCards.router')
 // const checkAdmin = require('./middlewares/checkAdmin')
 
 
@@ -64,4 +65,5 @@ app.use('/card', cardRouter);
 
 app.use('/userForm', formRouter);
 app.use('/album', albumRouter);
+app.use('/albumCards', albumCardsRouter);
 app.listen(PORT, () => { console.log('Hello express'); });
