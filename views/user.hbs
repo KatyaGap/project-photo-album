@@ -7,7 +7,7 @@
 	{{#if albums}}
      {{#each albums}}
         <li id="li-{{id}}" class="list-group-item">
-          <a href="/user:id/album:id">{{this.title}}</a>
+          <a href="/user{{notAdminId}}/album{{this.id}}">{{this.title}}</a>
           <button data-edit={{id}} class="btn btn-primary" type="click">edit title</button>
           <button data-delete={{id}} class="btn btn-primary" type="click">delete</button>
         </li>	

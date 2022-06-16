@@ -2,7 +2,6 @@
 const formFoto = document.querySelector('#formFoto')
 const deleteFotoButton = document.querySelector('#deleteFotoButton')
 const userForm = document.querySelector('#userForm');
-console.log(userForm)
 const ul = document.getElementById('ul');
 const container = document.querySelector('#div');
 const div = document.getElementById('update');
@@ -11,7 +10,6 @@ const div = document.getElementById('update');
 // добавление нового альбома
 userForm?.addEventListener('submit', async (e) => {
   e.preventDefault();
-	console.log('ccliiiiiick')
 		const formData = new FormData(userForm);
 		const data = Object.fromEntries(formData);
 		const response = await fetch('/userForm', {
@@ -26,7 +24,7 @@ userForm?.addEventListener('submit', async (e) => {
 			console.log(result)
 			ul.insertAdjacentHTML('beforeend', 
       `<li id="li-${result.id}" class="list-group-item">
-      <a href="/user:id/album:id">${result.title}</a>
+      <a href="/user${res.locals.notAminId}/album{id">${result.title}</a>
       <button data-edit=${result.id} class="btn btn-primary" type="click">edit title</button>
       <button data-delete=${result.id} class="btn btn-primary" type="click">delete</button>
     </li>`)
