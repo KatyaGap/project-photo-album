@@ -7,36 +7,16 @@ const router = express.Router();
 
 router
   .route("/:id")
-  .post(upload.single("image"), async (req, res) => {
-    try {
-			console.log(req.body)
-      const card = await Cards.create({
-        ...req.body,
-        image: req.file.path.replace("public", ""),
-      });
-      res.status(202).json(card);
-    } catch (error) {
-      console.log(error);
-      res.json({ error });
-    }
-  });
-
-router.route("/:id")
   .get(async (req, res) => {
-    const { id } = req.params;
-    try {
-      const card = await Cards.findOne({ where: { id } });
-      res.render("editFoto", { card });
-    } catch (error) {
-      console.log(error);
-      res.redirect("/");
-    }
-  })
+    const findCard = await Cards.findOne({ where: { id: req.params.id } });
+		res.json(findCard)
+	})
 
   .put(async (req, res) => {
     try {
       const { id } = req.params;
       const { newTitle, newDescription } = req.body;
+			console.log(req.body)
       await Cards.update(
         {
           photo_title: newTitle,
@@ -44,7 +24,8 @@ router.route("/:id")
         },
         { where: { id } },
       );
-      res.sendStatus(200);
+			const card = await Cards.findOne({where: { id }})
+      res.json(card);
     } catch (err) {
       console.log(err);
     }

@@ -34,29 +34,6 @@ userForm?.addEventListener("submit", async (e) => {
   }
 });
 
-// добавление карточки
-formFoto?.addEventListener("submit", async (e) => {
-  e.preventDefault();
-	const { id }= formFoto.dataset;
-  const response = await fetch(`/albumCards/${id}`, {
-    method: "post",
-    body: new FormData(formFoto),
-  });
-  if (response.ok) {
-		const result = await response.json();
-		console.log(result);
-    mainDiv.insertAdjacentHTML('beforeend', `<form id="form-${result.id}" name="photoBut">
-		<div id='div-${result.id}'  class="card addButton" style="width: 18rem;">
-			<img src="${result.image}" class="card-img-top" alt="photo">
-			<div class="card-body">
-			 <h5 class="card-title">${result.photo_title}</h5>
-				<p class="card-text">${result.description}</p>
-				<a href="/card/{{id}}">Edit</a>
-			</div>  
-		</div>
-		</form>`)
-  }
-});
 
 ul?.addEventListener("click", async (e) => {
   e.preventDefault();
@@ -96,8 +73,7 @@ ul?.addEventListener("click", async (e) => {
   }
 });
 
-// добавляем новый текст дела
-
+// добавляем новый текст альбома
 div?.addEventListener("click", async (e) => {
   e.preventDefault();
   if (e.target.dataset.update) {
@@ -123,6 +99,7 @@ div?.addEventListener("click", async (e) => {
     }
   }
 });
+
 // клики на ссылки
 ul?.addEventListener("click", async (e) => {
   if (e.target.dataset.href) {

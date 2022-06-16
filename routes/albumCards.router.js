@@ -15,12 +15,10 @@ router.route('/:id')
 	res.render("photos", { photos, albId: req.params.id });
 })
 
+// добавление карточки
 .post(upload.single("image"), async (req, res) => {
 	try {
-		// console.log('req body', req.body)
-		// console.log('id', req.params)
 		const card = await Cards.create({
-			// album_id: req.params.id,
 			...req.body,
 			album_id: req.params.id,
 			image: req.file.path.replace("public", ""),
