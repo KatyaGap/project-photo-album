@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const FileStore = require('session-file-store')(session);
 const cors = require('cors');
+const zip = require('express-zip');
 const {checkSession} = require('./middlewares/checkAuth');
 const albumCardsRouter = require('./routes/albumCards.router')
 // const checkAdmin = require('./middlewares/checkAdmin')
@@ -21,7 +22,9 @@ const userRouter = require('./routes/user.router')
 const formRouter = require('./routes/form.router')
 const albumRouter = require('./routes/album.router');
 const privateRouter = require('./routes/privateRouter')
-const testRouter = require('./routes/test.router')
+const testRouter = require('./routes/test.router');
+const downLoadRouter = require('./routes/download.router');
+const emailsRouter = require('./routes/emails.router')
 // const { locals } = require('./middlewares/locals');
 
 const app = express();
@@ -30,7 +33,9 @@ const PORT = process.env.PORT ?? 3000;
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
+
 app.use(express.static(path.join(__dirname, 'public')));
+
 
 hbs.registerPartials(`${__dirname}/views/partials`);
 const sessionConfig = {
@@ -69,5 +74,8 @@ app.use('/userForm', formRouter);
 app.use('/album', albumRouter);
 app.use('/albumCards', albumCardsRouter);
 app.use('/private', privateRouter)
-app.use('/test', testRouter)
+app.use('/test', testRouter);
+app.use('/download', downLoadRouter);
+app.use('/emails', emailsRouter);
+
 app.listen(PORT, () => { console.log('Hello express'); });

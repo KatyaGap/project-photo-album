@@ -1,7 +1,10 @@
 
 <h1>PhotoCards</h1>
 {{#if check2}}
-<form form data-id={{albId}} id="form" name="busForm">
+<button data-download={{albId}} class="btn btn-primary" type="click"><a href="/download/{{albId}}">download album</a></button>
+<br>
+<br>
+<form data-id={{albId}} id="form" name="busForm">
   <div class="mb-3">
     <input type="text" class="form-control" name="photo_title" placeholder="photo_title">
     <input type="text" class="form-control" name="description" placeholder="description">
@@ -27,6 +30,9 @@
 </div>
 </div>
 {{else}}
+<button data-download={{albId}} class="btn btn-primary" type="click"><a href="/download/{{albId}}">download album</a></button>
+<br>
+<br>
 <div class="container">
 <div id="dogList">
 	{{#each photos}}
