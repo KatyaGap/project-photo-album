@@ -36,6 +36,7 @@ app.set('view engine', 'hbs');
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+
 hbs.registerPartials(`${__dirname}/views/partials`);
 const sessionConfig = {
   name: 'auth',
