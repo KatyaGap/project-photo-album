@@ -15,7 +15,7 @@ form?.addEventListener('submit', async (e) => {
     const result = await response.json();
     dogList.insertAdjacentHTML(
       'afterbegin',
-      `<div id='div-${result.id}' class="card" style="width: 18rem;" >
+      `<div id='div-${result.id}' class="card standart" >
 		<img src="${result.image}" class="card-img-top" alt=${result.title_photo}>
 		<div class="card-body">
 			<h5 class="card-title">${result.photo_title}</h5>
@@ -87,7 +87,7 @@ container?.addEventListener('click', async (e) => {
     if (response.ok) {
       const result = await response.json();
       console.log(result);
-      div.innerHTML = `<div id='div-${result.id}' class="card" style="width: 18rem;" >
+      div.innerHTML = `<div id='div-${result.id}' class="card standart"  >
 					<img src="${result.image}" class="card-img-top" alt=${result.photo_title}>
 					<div class="card-body">
 						<h5 class="card-title">${result.photo_title}</h5>
@@ -110,7 +110,9 @@ container?.addEventListener('click', async (e) => {
     const image = div.querySelector('img');
     const response = await fetch(`/card/${id}`);
     if (response.ok) {
+      div.classList.toggle('standart');
       image.classList.toggle('viewMore');
+      div.classList.toggle('pop');
     }
   }
 });
