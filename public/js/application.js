@@ -98,7 +98,6 @@ div?.addEventListener('click', async (e) => {
           <button data-edit=${id} class="btn btn-primary" type="click">Edit title</button>
           <button data-delete=${id} class="btn btn-primary" type="click">delete</button>
 					<button data-private={{id}} class="btn btn-primary" type="click">private</button>`;
-
     }
   }
 });
@@ -112,7 +111,7 @@ ul?.addEventListener('click', async (e) => {
     if (response.ok) {
 			console.log(response)
      const result = await response.json();
-		 if (result.message === 200) alert('доступ ограничен');
+		 if (result.message === 200) alert ('доступ ограничен');
 		 else window.location.href = `/albumCards/${id}`;
     }
   }

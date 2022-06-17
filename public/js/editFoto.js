@@ -87,7 +87,7 @@ container?.addEventListener('click', async (e) => {
     if (response.ok) {
       const result = await response.json();
       console.log(result);
-      div.innerHTML = `<div id='div-${result.id}' class="card standart"  >
+      div.innerHTML = `<div id='div-${result.id}' class="card standart">
 					<img src="${result.image}" class="card-img-top" alt=${result.photo_title}>
 					<div class="card-body">
 						<h5 class="card-title">${result.photo_title}</h5>

@@ -25,8 +25,13 @@ router.route('/:id')
 	console.log('albumTitle', res.locals.albumTitle);
 	const albums = await Privates.findAll({ where: { albumId: findAlbum.id }, raw: true });
 	if (albums.length) {
-	const arr = albums.map(el => el.private_email);
-	if (arr.includes(res.locals.userId) || res.locals.userId === findAlbum.user_id) res.json(findAlbum);
+	const arr = albums.map(el => el.private_email);	
+	console.log('aaaaaaaa', res.locals.userEmail)
+	console.log('arr', arr)
+	if (arr.includes(res.locals.userEmail) || res.locals.userId === findAlbum.user_id) {
+		res.json(findAlbum);
+
+	}
 	else res.json({message:200});
 	} else {
 		res.json(findAlbum)

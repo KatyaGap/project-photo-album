@@ -1,6 +1,7 @@
 body {
 
-background-image: url(./forStyle/drew-beamer-kUHfMW8awpE-unsplash.jpg) ;
+background-image: url('https://img.freepik.com/free-vector/seamless-pattern-of-cacti-repeating-background-with-cactus-in-pots-and-polka-dots_89746-54.jpg') ;
+background-repeat: repeat;
 }
 
 .btn-primary {
@@ -18,7 +19,12 @@ background-image: url(./forStyle/drew-beamer-kUHfMW8awpE-unsplash.jpg) ;
   --bs-btn-disabled-color: #fff;
   --bs-btn-disabled-bg: #6596dd;
   --bs-btn-disabled-border-color: #5f79a1;
-}		
+}	
+/* .btn {
+	--bs-btn-padding-x: 0.15rem;
+	--bs-btn-padding-y: 0.15rem;
+} */
+
  .btn:focus { 
 	box-shadow: 0 0 0 0.25rem rgba(100, 83, 255, 0.212);
 } 
@@ -61,16 +67,34 @@ margin: 10px
 	
 	margin: 0; 
 }
-a{
 
 a {
-
 	text-decoration: none;
-	color: palevioletred
+	color: rgb(33, 7, 33);
+	font-size: 24px;
 }
-
+a:hover:{
+	color: orange;
+}
+/* .list-group {
+	font-family: URW Chancery L, cursive;
+} */
 .row1 {
 display: flex;
 flex-wrap: wrap;
 
 } 
+h2 {
+	color: rgb(38, 24, 24)
+}
+
+#style {
+	background-color: #ffffff8f;
+	font-size: 30px;
+	color: rgb(10, 98, 97)
+}
+#h1 {
+	text-align: center;
+	color:rgb(10, 98, 97)
+}
+
