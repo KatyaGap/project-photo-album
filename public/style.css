@@ -2,5 +2,10 @@
 margin: 10px
 }
 .viewMore{
-	transform: scale(3);
+	width: 150%;
+	height: 150%
 }
+
+/* image:hover {
+	transform: scale(3)
+} */
