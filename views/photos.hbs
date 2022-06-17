@@ -13,9 +13,9 @@
   <button type="submit" class="btn btn-primary">Add</button>
 </form>
 <div class="container">
-<div id="dogList">
+<div id="dogList" class="row1">
 	{{#each photos}}
-	<div id='div-{{id}}' class="card" style="width: 18rem;" >
+	<div id='div-{{id}}' class="card standart" >
   <img src="{{this.image}}" class="card-img-top" alt={{this.title}}>
   <div class="card-body">
     <h5 class="card-title">{{this.photo_title}}</h5>
@@ -36,7 +36,7 @@
 <div class="container">
 <div id="dogList">
 	{{#each photos}}
-	<div id='div-{{id}}' class="card" style="width: 18rem;" >
+	<div id='div-{{id}}' class="card standart" >
   <img src="{{this.image}}" class="card-img-top" alt={{this.title}}>
   <div class="card-body">
     <h5 class="card-title">{{this.photo_title}}</h5>
