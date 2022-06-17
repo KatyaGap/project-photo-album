@@ -93,11 +93,11 @@ div?.addEventListener('click', async (e) => {
     });
     if (response.ok) {
       const result = await response.json();
-      li.innerHTML = `<li id="li-${id}" class="list-group-item">
+      li.innerHTML = `
           <a href="/user:id/album:id">${result.title}</a>
           <button data-edit=${id} class="btn btn-primary" type="click">Edit title</button>
           <button data-delete=${id} class="btn btn-primary" type="click">delete</button>
-        </li>`;
+					<button data-private={{id}} class="btn btn-primary" type="click">private</button>`;
 
     }
   }
