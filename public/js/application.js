@@ -1,22 +1,21 @@
 const { photoBut } = document.forms;
 
-const formFoto = document.querySelector("#formFoto");
-const userForm = document.querySelector("#userForm");
-const ul = document.getElementById("ul");
-console.log(ul)
-const div = document.getElementById("update");
+const formFoto = document.querySelector('#formFoto');
+const userForm = document.querySelector('#userForm');
+const ul = document.getElementById('ul');
+console.log(ul);
+const div = document.getElementById('update');
 const mainDiv = document.querySelector('.main');
 
-
 // добавление нового альбома
-userForm?.addEventListener("submit", async (e) => {
+userForm?.addEventListener('submit', async (e) => {
   e.preventDefault();
   const formData = new FormData(userForm);
   const data = Object.fromEntries(formData);
-  const response = await fetch("/userForm", {
-    method: "post",
+  const response = await fetch('/userForm', {
+    method: 'post',
     headers: {
-      "Content-type": "application/json",
+      'Content-type': 'application/json',
     },
     body: JSON.stringify(data),
   });
@@ -24,7 +23,7 @@ userForm?.addEventListener("submit", async (e) => {
     const result = await response.json();
     console.log(result);
     ul.insertAdjacentHTML(
-      "beforeend",
+      'beforeend',
       `<li id="li-${result.id}" class="list-group-item">
 			<a data-href=${result.id} id="a-${result.id}" href="">${result.title}</a>
       <button data-edit=${result.id} class="btn btn-primary" type="click">edit title</button>
@@ -36,13 +35,13 @@ userForm?.addEventListener("submit", async (e) => {
 });
 
 // удаление альбома
-ul?.addEventListener("click", async (e) => {
+ul?.addEventListener('click', async (e) => {
   e.preventDefault();
   if (e.target.dataset.delete) {
     const id = e.target.dataset.delete;
     const li = document.getElementById(`li-${id}`);
     const response = await fetch(`/album/${id}`, {
-      method: "delete",
+      method: 'delete',
     });
     if (response.ok) {
       console.log(response);
@@ -53,11 +52,11 @@ ul?.addEventListener("click", async (e) => {
 
 // редактирование названия альбома
 // отлавливаем нажатие на кнопку редактирования
-ul?.addEventListener("click", async (e) => {
+ul?.addEventListener('click', async (e) => {
   e.preventDefault();
   if (e.target.dataset.edit) {
     const id = e.target.dataset.edit;
-    console.log("click edit");
+    console.log('click edit');
     const li = document.getElementById(`li-${id}`);
     console.log(li);
     const response = await fetch(`/album/${id}`);
@@ -75,18 +74,18 @@ ul?.addEventListener("click", async (e) => {
 });
 
 // добавляем новый текст альбома
-div?.addEventListener("click", async (e) => {
+div?.addEventListener('click', async (e) => {
   e.preventDefault();
   if (e.target.dataset.update) {
     const id = e.target.dataset.update;
     const li = document.getElementById(`li-${id}`);
-    const formEdit = document.querySelector("#editForm");
+    const formEdit = document.querySelector('#editForm');
     const formData = new FormData(formEdit);
     const data = Object.fromEntries(formData);
     const response = await fetch(`/album/${id}`, {
-      method: "post",
+      method: 'post',
       headers: {
-        "Content-type": "application/json",
+        'Content-type': 'application/json',
       },
       body: JSON.stringify(data),
     });
@@ -102,11 +101,11 @@ div?.addEventListener("click", async (e) => {
 });
 
 // клики на ссылки
-ul?.addEventListener("click", async (e) => {
+ul?.addEventListener('click', async (e) => {
   if (e.target.dataset.href) {
     const id = e.target.dataset.href;
     const a = document.getElementById(`a-${id}`);
-    const response = await fetch(`/album/${id}`)
+    const response = await fetch(`/album/${id}`);
     if (response.ok) {
       console.log(response);
       window.location.href = `/albumCards/${id}`;
@@ -115,11 +114,11 @@ ul?.addEventListener("click", async (e) => {
 });
 
 // кнопка приватности
-ul?.addEventListener("click", async (e) => {
+ul?.addEventListener('click', async (e) => {
   e.preventDefault();
   if (e.target.dataset.private) {
     const id = e.target.dataset.private;
-    console.log("click edit");
+    console.log('click edit');
     const li = document.getElementById(`li-${id}`);
     const response = await fetch(`/album/${id}`);
     if (response.ok) {
@@ -127,37 +126,38 @@ ul?.addEventListener("click", async (e) => {
       li.innerHTML = `<form id="privateForm">
 				<div class="mb-3">
 					<label for="exampleInputEmail1" class="form-label">Add person's email</label>
-					<input type="text" name="privateEmail" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="email">
+					<input type="text" name="private_email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="email">
 				</div>
 				<button data-email=${id} id="editAlbum" type="submit" class="btn btn-primary">Submit</button>
-			</form>`
+			</form>`;
     }
   }
 });
 
 // добавление емайл в приватный список
-ul?.addEventListener("submit", async (e) => {
-	console.log("click aaaaaa");
+ul?.addEventListener('click', async (e) => {
   e.preventDefault();
+  console.log('click aaaaaa');
   if (e.target.dataset.email) {
-    const id = e.target.dataset.privateEmail;
-    console.log("click priv email");
+    const id = e.target.dataset.email;
+    console.log('click priv email');
     const li = document.getElementById(`li-${id}`);
-		const formPriv = document.querySelector("#privateForm");
+    const formPriv = document.querySelector('#privateForm');
     const formData = new FormData(formPriv);
-		const data = Object.fromEntries(formData);
-		const response = await fetch(`/private/${id}`, {
-      method: "post",
+    const data = Object.fromEntries(formData);
+    const response = await fetch(`/private/${id}`, {
+      method: 'post',
       headers: {
-        "Content-type": "application/json",
+        'Content-type': 'application/json',
       },
       body: JSON.stringify(data),
     });
-      const result = await response.json();
-
-      li.innerHTML = `<a data-href={{id}} id="a-{{id}}" href="">{{this.title}}</a>
-			<button data-edit={{id}} class="btn btn-primary" type="click">edit title</button>
-			<button data-delete={{id}} class="btn btn-primary" type="click">delete</button>
-			<button data-private={{id}} class="btn btn-primary" type="click">private</button>`
-    }
-  })
+    const result = await response.json();
+		console.log(result)
+    // li.innerHTML = `<a data-href={{id}} id="a-{{id}}" href="">{{this.title}}</a>
+		// 	<button data-edit={{id}} class="btn btn-primary" type="click">edit title</button>
+		// 	<button data-delete={{id}} class="btn btn-primary" type="click">delete</button>
+		// 	<button data-private={{id}} class="btn btn-primary" type="click">private</button>`;
+		window.location.href = `http://localhost:3000/user/${result.userId}`
+  }
+});
