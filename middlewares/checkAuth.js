@@ -9,6 +9,7 @@ const checkSession = (req, res, next) => {
   if (req.session.userId) {
     res.locals.userId = req.session.userId;
 		res.locals.login = req.session.userLogin;
+		res.locals.email = req.session.email;
 		console.log('login', res.locals.login)
     return next();
   }

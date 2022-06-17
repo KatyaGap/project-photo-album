@@ -16,6 +16,8 @@ router.route('/')
         const passCheck = await bcrypt.compare(password, user.password);
         if (user && passCheck) {
           req.session.userId = user.id;
+					req.session.userLogin = user.login;
+					req.session.userEmail = user.email;
           res.redirect('/');
         } else if (user) { 
 					console.log("You pass uncorrect password")

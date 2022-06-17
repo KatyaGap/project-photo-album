@@ -16,6 +16,7 @@ router.route('/')
         const user = await Users.create({ email: email, login: name, password: hashPass });
 				req.session.userId = user.id;
 				req.session.userLogin = user.login;
+				req.session.userEmail = user.email;
         res.redirect('/');
       }
     } catch (err) {
