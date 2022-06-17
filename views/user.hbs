@@ -1,5 +1,5 @@
 <div class="row mt-5">
-  <div  class="col 5">	
+  <div id="href" class="col 5">	
 		<h1>Photoalbums</h1>
 	{{#if check}}
 	<div id="update">
@@ -11,6 +11,7 @@
           <button data-edit={{id}} class="btn btn-primary" type="click">edit title</button>
           <button data-delete={{id}} class="btn btn-primary" type="click">delete</button>
 					<button data-private={{id}} class="btn btn-primary" type="click">private</button>
+					<button data-download={{id}} class="btn btn-primary" type="click">download</button>
         </li>
 				{{/each}}
 				</ul>	
@@ -29,7 +30,6 @@
   </div>
 </div>
 <p>No albums Yet</p>
-
 <form id="userForm">
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Title</label>
@@ -45,6 +45,7 @@
      {{#each albums}}
         <li id="li-{{id}}" class="list-group-item">
           <a data-href={{id}} id="a-{{id}}" href="">{{this.title}}</a>
+					<button data-download={{id}} class="btn btn-primary" type="click">download</button>
         </li>
 				{{/each}}
 				</ul>
