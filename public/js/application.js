@@ -107,8 +107,10 @@ ul?.addEventListener('click', async (e) => {
     const a = document.getElementById(`a-${id}`);
     const response = await fetch(`/album/${id}`);
     if (response.ok) {
-      console.log(response);
-      window.location.href = `/albumCards/${id}`;
+			console.log(response)
+     const result = await response.json();
+		 if (result.message === 200) alert('доступ ограничен');
+		 else window.location.href = `/albumCards/${id}`;
     }
   }
 });
@@ -129,6 +131,7 @@ ul?.addEventListener('click', async (e) => {
 					<input type="text" name="private_email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="email">
 				</div>
 				<button data-email=${id} id="editAlbum" type="submit" class="btn btn-primary">Submit</button>
+				<button data-del=${id} id="editAlbum" type="submit" class="btn btn-primary">Delete email</button>
 			</form>`;
     }
   }
@@ -153,11 +156,29 @@ ul?.addEventListener('click', async (e) => {
       body: JSON.stringify(data),
     });
     const result = await response.json();
-		console.log(result)
-    // li.innerHTML = `<a data-href={{id}} id="a-{{id}}" href="">{{this.title}}</a>
-		// 	<button data-edit={{id}} class="btn btn-primary" type="click">edit title</button>
-		// 	<button data-delete={{id}} class="btn btn-primary" type="click">delete</button>
-		// 	<button data-private={{id}} class="btn btn-primary" type="click">private</button>`;
+		window.location.href = `http://localhost:3000/user/${result.userId}`
+  }
+});
+
+
+// удаление емайла из приватного списка
+ul?.addEventListener('click', async (e) => {
+  e.preventDefault();
+  if (e.target.dataset.del) {  
+		console.log('click del');
+    const id = e.target.dataset.del;
+    const li = document.getElementById(`li-${id}`);
+    const formPriv = document.querySelector('#privateForm');
+    const formData = new FormData(formPriv);
+    const data = Object.fromEntries(formData);
+    const response = await fetch(`/private/${id}`, {
+      method: 'delete',
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+    const result = await response.json();
 		window.location.href = `http://localhost:3000/user/${result.userId}`
   }
 });

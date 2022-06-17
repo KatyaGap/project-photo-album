@@ -114,3 +114,30 @@ container?.addEventListener('click', async (e) => {
     }
   }
 });
+
+
+// тестовое добавление в albums
+// form?.addEventListener('submit', async (e) => {
+//   e.preventDefault();
+//   const { id } = form.dataset;
+//   const response = await fetch(`/test/${id}`, {
+//     method: 'post',
+//     body: new FormData(form),
+//   });
+//   if (response.ok) {
+//     const result = await response.json();
+//     dogList.insertAdjacentHTML(
+//       'afterbegin',
+//       `<div id='div-${result.id}' class="card" style="width: 18rem;" >
+// 		<img src="${result.image}" class="card-img-top" alt=${result.title_photo}>
+// 		<div class="card-body">
+// 			<h5 class="card-title">${result.photo_title}</h5>
+// 			<p class="card-text">${result.description}</p>
+// 			<button data-more=${result.id} class="btn btn-primary" type="click">view more</button>
+// 			<button data-edit=${result.id} class="btn btn-primary" type="click">edit</button>
+// 			<button data-delete=${result.id} class="btn btn-primary" type="click">delete</button>
+// 		</div>
+// 	</div>`
+//     );
+//   }
+// });

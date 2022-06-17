@@ -21,6 +21,7 @@ const userRouter = require('./routes/user.router')
 const formRouter = require('./routes/form.router')
 const albumRouter = require('./routes/album.router');
 const privateRouter = require('./routes/privateRouter')
+const testRouter = require('./routes/test.router')
 // const { locals } = require('./middlewares/locals');
 
 const app = express();
@@ -68,4 +69,5 @@ app.use('/userForm', formRouter);
 app.use('/album', albumRouter);
 app.use('/albumCards', albumCardsRouter);
 app.use('/private', privateRouter)
+app.use('/test', testRouter)
 app.listen(PORT, () => { console.log('Hello express'); });

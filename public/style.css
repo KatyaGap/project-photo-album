@@ -6,6 +6,7 @@ margin: 10px
 	height: 150%
 }
 
-/* image:hover {
-	transform: scale(3)
-} */
+a{
+	text-decoration: none;
+	color: palevioletred
+}

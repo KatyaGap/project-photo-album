@@ -1,6 +1,7 @@
 const express = require('express');
 const async = require('hbs/lib/async');
-const {Users, Albums, Cards} = require('../db/models')
+const {Users, Albums, Cards, Privates} = require('../db/models');
+const privates = require('../db/models/privates');
 
 const router = express.Router();
 
@@ -21,9 +22,16 @@ router.route('/:id')
 	const findAlbum = await Albums.findOne({ where: { id: req.params.id } });
 	res.locals.albumId = findAlbum.id;
 	res.locals.albumTitle = findAlbum.title;
-	console.log('albumTitle', res.locals.albumTitle)
-		res.json(findAlbum);
-	})
+	console.log('albumTitle', res.locals.albumTitle);
+	const albums = await Privates.findAll({ where: { albumId: findAlbum.id }, raw: true });
+	if (albums.length) {
+	const arr = albums.map(el => el.private_email);
+	if (arr.includes(res.locals.userId) || res.locals.userId === findAlbum.user_id) res.json(findAlbum);
+	else res.json({message:200});
+	} else {
+		res.json(findAlbum)
+	}
+})
 	
 	.post(async (req, res) => {
 		const findAlbum = await Albums.findOne({ where: { id: req.params.id } });

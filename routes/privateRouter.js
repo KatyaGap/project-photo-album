@@ -22,4 +22,21 @@ router.route('/:id')
 		res.json({ error });
 	}
 })
+
+
+.delete(async (req, res) => {
+	try {
+		const { id } = req.params;
+		const album = await Albums.findOne({ where: { id: req.params.id}});
+		const userId = album.user_id;
+		const result = await Privates.destroy({
+			where:
+				{ albumId: req.params.id },
+		});
+		res.json({ result, userId });
+	} catch (error) {
+		console.log(error);
+		res.json({ error });
+	}
+})
 module.exports = router;
