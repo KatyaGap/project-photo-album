@@ -11,7 +11,6 @@
           <button data-edit={{id}} class="btn btn-primary" type="click">edit title</button>
           <button data-delete={{id}} class="btn btn-primary" type="click">delete</button>
 					<button data-private={{id}} class="btn btn-primary" type="click">private</button>
-					<button data-download={{id}} class="btn btn-primary" type="click">download</button>
         </li>
 				{{/each}}
 				</ul>	
@@ -45,7 +44,7 @@
      {{#each albums}}
         <li id="li-{{id}}" class="list-group-item">
           <a data-href={{id}} id="a-{{id}}" href="">{{this.title}}</a>
-					<button data-download={{id}} class="btn btn-primary" type="click">download</button>
+					{{!-- <button data-download={{id}} class="btn btn-primary" type="click">download</button> --}}
         </li>
 				{{/each}}
 				</ul>

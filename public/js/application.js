@@ -93,11 +93,11 @@ div?.addEventListener('click', async (e) => {
     });
     if (response.ok) {
       const result = await response.json();
-      li.innerHTML = `<li id="li-${id}" class="list-group-item">
+      li.innerHTML = `
           <a href="/user:id/album:id">${result.title}</a>
           <button data-edit=${id} class="btn btn-primary" type="click">Edit title</button>
           <button data-delete=${id} class="btn btn-primary" type="click">delete</button>
-        </li>`;
+					<button data-private={{id}} class="btn btn-primary" type="click">private</button>`;
 
     }
   }
@@ -137,7 +137,7 @@ ul?.addEventListener('click', async (e) => {
 				<button data-del=${id} id="editAlbum" type="submit" class="btn btn-primary">Delete email</button>
 			</form>`;
 			userForm.remove();
-			href.insertAdjacentHTML('afterend', `<a href="/emails/${id}">Private list</a>`)
+			href.insertAdjacentHTML('afterend', `<a href="/emails/${id}">Private list</a>`);
     }
   }
 });
@@ -190,31 +190,17 @@ ul?.addEventListener('click', async (e) => {
 
 
 // download
-ul?.addEventListener('click', async (e) => {
-  e.preventDefault();
-  if (e.target.dataset.download) {
-    const id = e.target.dataset.download;
-    console.log('click down');
-    const li = document.getElementById(`li-${id}`);
-    console.log(li);
-    const response = await fetch(`/download/${id}`);
-    if (response.ok) {
-      console.log('все ок')
-    }
-  }
-});
-
-// список всех емайлов
 // ul?.addEventListener('click', async (e) => {
 //   e.preventDefault();
-//   console.log('click aaaaaa');
-//   if (e.target.dataset.all) {
-//     const id = e.target.dataset.all;
-// 		const li = document.getElementById(`li-${id}`);
-//     const response = await fetch(`/emails/${id}`)
-// 		if (response.ok) {
-// 			const result = await response;
-// 	li.innerHTML = `{result.private_email}`
+//   if (e.target.dataset.download) {
+//     const id = e.target.dataset.download;
+//     console.log('click down');
+//     const li = document.getElementById(`li-${id}`);
+//     console.log(li);
+//     const response = await fetch(`/download/${id}`);
+//     if (response.ok) {
+//       console.log('все ок')
 //     }
-// 	}
-// })
+//   }
+// });
+
