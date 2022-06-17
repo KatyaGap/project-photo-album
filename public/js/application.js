@@ -6,6 +6,8 @@ const ul = document.getElementById('ul');
 console.log(ul);
 const div = document.getElementById('update');
 const mainDiv = document.querySelector('.main');
+const href = document.getElementById('href')
+const update = document.getElementById('update')
 
 // добавление нового альбома
 userForm?.addEventListener('submit', async (e) => {
@@ -96,6 +98,7 @@ div?.addEventListener('click', async (e) => {
           <button data-edit=${id} class="btn btn-primary" type="click">Edit title</button>
           <button data-delete=${id} class="btn btn-primary" type="click">delete</button>
         </li>`;
+
     }
   }
 });
@@ -133,6 +136,8 @@ ul?.addEventListener('click', async (e) => {
 				<button data-email=${id} id="editAlbum" type="submit" class="btn btn-primary">Submit</button>
 				<button data-del=${id} id="editAlbum" type="submit" class="btn btn-primary">Delete email</button>
 			</form>`;
+			userForm.remove();
+			href.insertAdjacentHTML('afterend', `<a href="/emails/${id}">Private list</a>`)
     }
   }
 });
@@ -182,3 +187,34 @@ ul?.addEventListener('click', async (e) => {
 		window.location.href = `http://localhost:3000/user/${result.userId}`
   }
 });
+
+
+// download
+ul?.addEventListener('click', async (e) => {
+  e.preventDefault();
+  if (e.target.dataset.download) {
+    const id = e.target.dataset.download;
+    console.log('click down');
+    const li = document.getElementById(`li-${id}`);
+    console.log(li);
+    const response = await fetch(`/download/${id}`);
+    if (response.ok) {
+      console.log('все ок')
+    }
+  }
+});
+
+// список всех емайлов
+// ul?.addEventListener('click', async (e) => {
+//   e.preventDefault();
+//   console.log('click aaaaaa');
+//   if (e.target.dataset.all) {
+//     const id = e.target.dataset.all;
+// 		const li = document.getElementById(`li-${id}`);
+//     const response = await fetch(`/emails/${id}`)
+// 		if (response.ok) {
+// 			const result = await response;
+// 	li.innerHTML = `{result.private_email}`
+//     }
+// 	}
+// })

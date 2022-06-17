@@ -31,7 +31,9 @@ router.route('/:id')
 		const userId = album.user_id;
 		const result = await Privates.destroy({
 			where:
-				{ albumId: req.params.id },
+				{ albumId: req.params.id,
+					private_email: req.body.private_email
+				 },
 		});
 		res.json({ result, userId });
 	} catch (error) {
