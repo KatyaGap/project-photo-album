@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const {Users, Albums, Cards} = require('../db/models')
-const {checkAuth} = require('../middlewares/checkAuth');
+const { Users, Albums, Cards } = require('../db/models');
+const { checkAuth } = require('../middlewares/checkAuth');
 const bcrypt = require('bcrypt');
 
-router.route('/')
+router
+  .route('/')
   .get(async (req, res) => {
     res.render('login');
   })
@@ -16,16 +17,10 @@ router.route('/')
         const passCheck = await bcrypt.compare(password, user.password);
         if (user && passCheck) {
           req.session.userId = user.id;
-					req.session.userLogin = user.login;
-					req.session.userEmail = user.email;
+          req.session.userLogin = user.login;
+          req.session.userEmail = user.email;
           res.redirect('/');
-        } else if (user) { 
-					console.log("You pass uncorrect password")
-					res.redirect('/login'); 
-				} else {
-					console.log("Email is not found")
-					res.redirect('/login'); 
-				}
+        } else res.redirect('/login');
       }
     } catch (err) {
       console.log(err);

@@ -2,6 +2,7 @@
 const {
   Model
 } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class Albums extends Model {
     /**
@@ -11,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       this.belongsTo(models.Users, { foreignKey: 'user_id' });
-			this.hasMany(models.Cards, { foreignKey: 'album_id' });
+      this.hasMany(models.Cards, { foreignKey: 'album_id' });
     }
   }
   Albums.init({

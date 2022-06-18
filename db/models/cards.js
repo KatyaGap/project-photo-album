@@ -2,6 +2,7 @@
 const {
   Model
 } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class Cards extends Model {
     /**
@@ -11,8 +12,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       this.belongsTo(models.Albums, { foreignKey: 'album_id' });
+    }
   }
-}
   Cards.init({
     photo_title: DataTypes.STRING,
     image: DataTypes.STRING,

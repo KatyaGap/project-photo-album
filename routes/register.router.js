@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const {Users, Albums, Cards} = require('../db/models')
-const {checkAuth} = require('../middlewares/checkAuth');
 const bcrypt = require('bcrypt');
+const { Users, Albums, Cards } = require('../db/models');
+const { checkAuth } = require('../middlewares/checkAuth');
 
 router.route('/')
   .get(checkAuth, async (req, res) => {
@@ -12,11 +12,18 @@ router.route('/')
     try {
       const { email, name, password } = req.body;
       if (email && name && password) {
-        const hashPass = await bcrypt.hash(password, Number(process.env.SALTROUNDS));
-        const user = await Users.create({ email: email, login: name, password: hashPass });
-				req.session.userId = user.id;
-				req.session.userLogin = user.login;
-				req.session.userEmail = user.email;
+        const hashPass = await bcrypt.hash(
+          password,
+          Number(process.env.SALTROUNDS)
+        );
+        const user = await Users.create({
+          email,
+          login: name,
+          password: hashPass,
+        });
+        req.session.userId = user.id;
+        req.session.userLogin = user.login;
+        req.session.userEmail = user.email;
         res.redirect('/');
       }
     } catch (err) {
@@ -24,4 +31,4 @@ router.route('/')
       res.redirect('/register');
     }
   });
-module.exports = router
+module.exports = router;

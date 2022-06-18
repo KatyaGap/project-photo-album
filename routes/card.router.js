@@ -1,16 +1,15 @@
-const express = require("express");
+const express = require('express');
 
-const { Users, Albums, Cards } = require("../db/models");
-const upload = require("../middlewares/multer.middleware");
+const { Users, Albums, Cards } = require('../db/models');
 
 const router = express.Router();
 
 router
-  .route("/:id")
+  .route('/:id')
   .get(async (req, res) => {
     const findCard = await Cards.findOne({ where: { id: req.params.id } });
-		res.json(findCard)
-	})
+    res.json(findCard);
+  })
 
   .put(async (req, res) => {
     try {
@@ -23,7 +22,7 @@ router
         },
         { where: { id } },
       );
-			const card = await Cards.findOne({where: { id }})
+      const card = await Cards.findOne({ where: { id } });
       res.json(card);
     } catch (err) {
       console.log(err);
@@ -33,8 +32,7 @@ router
   .delete(async (req, res) => {
     try {
       const result = await Cards.destroy({
-        where:
-          { id: req.params.id },
+        where: { id: req.params.id },
       });
       res.sendStatus(200);
     } catch (error) {
