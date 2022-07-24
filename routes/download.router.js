@@ -1,9 +1,6 @@
 const express = require('express');
-const zip = require('express-zip');
-const { Users, Albums, Cards, Privates } = require('../db/models');
-const upload = require('../middlewares/multer.middleware');
-
 const path = require('path');
+const { Albums, Cards, Privates } = require('../db/models');
 
 function makeRandomStr(num) {
   let str = '';
@@ -11,7 +8,7 @@ function makeRandomStr(num) {
   for (let i = 0; i <= num; i += 1) {
     str += letters.charAt(Math.floor(Math.random() * letters.length));
   }
-  return str + '.jpeg';
+  return `${str}.jpeg`;
 }
 
 const router = express.Router();
@@ -26,8 +23,8 @@ router.route('/:id').get(async (req, res) => {
   if (albums.length) {
     const arr = albums.map((el) => el.private_email);
     if (
-      arr.includes(res.locals.userId) ||
-      res.locals.userId === findAlbum.user_id
+      arr.includes(res.locals.userId)
+      || res.locals.userId === findAlbum.user_id
     ) {
       const cards = await Cards.findAll({
         where: { album_id: findAlbum.id },

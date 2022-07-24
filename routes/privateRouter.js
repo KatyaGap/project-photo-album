@@ -1,5 +1,6 @@
 const express = require('express');
-const { Users, Albums, Cards, Privates } = require('../db/models');
+const { Albums, Privates } = require('../db/models');
+
 const router = express.Router();
 
 router

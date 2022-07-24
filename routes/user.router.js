@@ -1,6 +1,5 @@
 const express = require('express');
-const { Users, Albums, Cards } = require('../db/models');
-const upload = require('../middlewares/multer.middleware');
+const { Users, Albums } = require('../db/models');
 
 const router = express.Router();
 

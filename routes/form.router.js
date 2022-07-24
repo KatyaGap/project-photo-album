@@ -1,6 +1,5 @@
 const express = require('express');
-const async = require('hbs/lib/async');
-const { Users, Albums, Cards } = require('../db/models');
+const { Albums } = require('../db/models');
 
 const router = express.Router();
 

@@ -1,6 +1,6 @@
 const express = require('express');
-const async = require('hbs/lib/async');
-const { Users, Albums, Cards } = require('../db/models');
+const { Albums, Cards } = require('../db/models');
+
 const router = express.Router();
 const upload = require('../middlewares/multer.middleware');
 
@@ -8,8 +8,6 @@ router
   .route('/:id')
   .get(async (req, res) => {
     const photos = await Cards.findAll({ where: { album_id: req.params.id } });
-    // console.log('photos', photos);
-    // const card = await Cards.findOne({ where: { album_id: req.params.id } });
     const album = await Albums.findOne({ where: { id: req.params.id } });
     const albumOwn = album.user_id;
     res.locals.albumOwn = albumOwn;
@@ -31,7 +29,6 @@ router
         album_id: req.params.id,
         image: req.file.path.replace('public', ''),
       });
-      console.log('card', card);
       res.json(card);
     } catch (error) {
       console.log(error);

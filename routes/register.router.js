@@ -1,7 +1,8 @@
 const express = require('express');
+
 const router = express.Router();
 const bcrypt = require('bcrypt');
-const { Users, Albums, Cards } = require('../db/models');
+const { Users } = require('../db/models');
 const { checkAuth } = require('../middlewares/checkAuth');
 
 router.route('/')
@@ -14,7 +15,7 @@ router.route('/')
       if (email && name && password) {
         const hashPass = await bcrypt.hash(
           password,
-          Number(process.env.SALTROUNDS)
+          Number(process.env.SALTROUNDS),
         );
         const user = await Users.create({
           email,

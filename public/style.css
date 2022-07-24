@@ -1,5 +1,4 @@
 body {
-
 background-image: url('https://img.freepik.com/free-vector/seamless-pattern-of-cacti-repeating-background-with-cactus-in-pots-and-polka-dots_89746-54.jpg') ;
 background-repeat: repeat;
 }
@@ -20,14 +19,13 @@ background-repeat: repeat;
   --bs-btn-disabled-bg: #6596dd;
   --bs-btn-disabled-border-color: #5f79a1;
 }	
-/* .btn {
-	--bs-btn-padding-x: 0.15rem;
-	--bs-btn-padding-y: 0.15rem;
-} */
 
  .btn:focus { 
 	box-shadow: 0 0 0 0.25rem rgba(100, 83, 255, 0.212);
 } 
+#registr, #login {
+	margin: 10px;
+}
 .form-control:focus{
 	box-shadow: 0 0 0 0.25rem rgb(185 176 255);
 }
@@ -53,8 +51,6 @@ margin: 10px
 	background-color: #ffffff8f
 }
 .card-img-top{
-
-
 	height: 100%;
 	object-fit: cover;
 }
@@ -76,9 +72,6 @@ a {
 a:hover:{
 	color: orange;
 }
-/* .list-group {
-	font-family: URW Chancery L, cursive;
-} */
 .row1 {
 display: flex;
 flex-wrap: wrap;

@@ -1,8 +1,8 @@
 const express = require('express');
+
 const router = express.Router();
-const { Users, Albums, Cards } = require('../db/models');
-const { checkAuth } = require('../middlewares/checkAuth');
 const bcrypt = require('bcrypt');
+const { Users } = require('../db/models');
 
 router
   .route('/')

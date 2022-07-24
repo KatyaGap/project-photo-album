@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { Users, Albums, Cards } = require('../db/models');
+const { Cards } = require('../db/models');
 
 const router = express.Router();
 
@@ -31,7 +31,7 @@ router
 
   .delete(async (req, res) => {
     try {
-      const result = await Cards.destroy({
+      await Cards.destroy({
         where: { id: req.params.id },
       });
       res.sendStatus(200);
